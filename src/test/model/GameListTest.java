@@ -175,5 +175,19 @@ public class GameListTest {
         assertEquals(66.67, g1.theirOpeningWinRate("king's pawn opening"));
     }
 
+    @Test
+    void testGetList() {
+        g1.addGame(a);
+        g1.addGame(b);
+        g1.addGame(c);
+
+        LinkedList<Game> list = new LinkedList<Game>();
+        list.add(a);
+        list.add(b);
+        list.add(c);
+
+        assertEquals(list, g1.getList());
+    }
+
 
 }

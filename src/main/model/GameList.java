@@ -102,8 +102,6 @@ public class GameList {
         return Math.round(winrate * 100.0) / 100.0;
     }
 
-
-
     //EFFECTS: returns a list of game, so that openingsAnalyzer can handle it in loops
     public LinkedList<Game> getList() {
         return list;
