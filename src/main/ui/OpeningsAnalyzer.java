@@ -132,7 +132,7 @@ public class OpeningsAnalyzer {
 
 
     public void viewGames() {
-        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------y------------------------------------------");
         int count = 0;
         LinkedList<Game> list = gl.getList();
 
@@ -141,7 +141,7 @@ public class OpeningsAnalyzer {
             System.out.println("Game" + count + ": played as " + g.getColor() + ", played " + g.getMyOpening()
                     + " against " + g.getTheirOpening() + ". " + g.getResult());
         }
-        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------u--------------------------------------------");
         removeOrGoBack();
     }
 
@@ -155,6 +155,7 @@ public class OpeningsAnalyzer {
             System.out.println("You are now removing a game from the list.");
             remove();
         } else {
+            System.out.println("That's not a valid input.");
             removeOrGoBack();
         }
     }
@@ -183,15 +184,70 @@ public class OpeningsAnalyzer {
         System.out.println("If you would like to check your win rate with your specific opening, type 'a'.");
         System.out.println("If you would like to check your win rate against a  specific opening, type 'b'.");
         System.out.println("Type m to go back to menu.");
+        String choice = input.nextLine();
+
+        if (choice.equals("a")) {
+            myOpeningWR();
+        } else if (choice.equals("b")) {
+            theirOpeningWR();
+        } else if (choice.equals("m")) {
+            menu();
+        } else {
+            System.out.println("That's not a valid input.");
+            pickedViewStats();
+        }
 
     }
+
+    public void myOpeningWR() {
+        System.out.println("Type the opening that you played you want to see the win rate of.");
+        String n = input.nextLine();
+        System.out.println("Your win rate with " + n + " is " + gl.myOpeningWinRate(n) + "%.");
+        afterMWR();
+    }
+
+    public void afterMWR() {
+        System.out.println("If you would like to check win rates with other openings, type 'a'.");
+        System.out.println("If you would like to go back to statistics menu, type 's'.");
+        String x = input.nextLine();
+
+        if (x.equals("a")) {
+            myOpeningWR();
+        } else if (x.equals("s")) {
+            pickedViewStats();
+        } else {
+            System.out.println("That's not a valid input.");
+            afterMWR();
+        }
+    }
+
+    public void theirOpeningWR() {
+        System.out.println("Type the opening that you played against which you want to see the win rate of.");
+        String n = input.nextLine();
+        System.out.println("Your win rate against " + n + " is " + gl.theirOpeningWinRate(n) + "%.");
+        afterTWR();
+    }
+
+    public void afterTWR() {
+        System.out.println("If you would like to check win rates against other openings, type 'a'.");
+        System.out.println("If you would like to go back to statistics menu, type 's'.");
+        String x = input.nextLine();
+
+        if (x.equals("a")) {
+            theirOpeningWR();
+        } else if (x.equals("s")) {
+            pickedViewStats();
+        } else {
+            System.out.println("That's not a valid input.");
+            afterTWR();
+        }
+    }
+
 
     public void pickNotValid() {
         System.out.println("That input is not valid.");
         menu();
     }
-
-
 
 
 }

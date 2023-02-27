@@ -53,7 +53,7 @@ public class GameList {
         double wins = 0;
 
         for (Game g : list) {
-            if (g.getResult() == "won") {
+            if (g.getResult().equals("won")) {
                 wins = wins + 1;
             }
         }
@@ -68,13 +68,13 @@ public class GameList {
         double wins = 0;
 
         for (Game g : list) {
-            if (g.getMyOpening() == myOpening) {
+            if (g.getMyOpening().equals(myOpening)) {
                 filteredList.add(g);
             }
         }
 
         for (Game f : filteredList) {
-            if (f.getResult() == "won") {
+            if (f.getResult().equals("won")) {
                 wins = wins + 1;
             }
         }
@@ -88,13 +88,13 @@ public class GameList {
         double wins = 0;
 
         for (Game g : list) {
-            if (g.getTheirOpening() == theirOpening) {
+            if (g.getTheirOpening().equals(theirOpening)) {
                 filteredList.add(g);
             }
         }
 
         for (Game f : filteredList) {
-            if (f.getResult() == "won") {
+            if (f.getResult().equals("won")) {
                 wins = wins + 1;
             }
         }
