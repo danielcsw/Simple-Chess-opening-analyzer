@@ -60,9 +60,10 @@ public class OpeningsAnalyzer {
             System.out.println("You are now viewing all your games.");
             viewGames();
         } else if (choice.equals("c")) {
+            System.out.println("You are now viewing your statistics.");
             pickedViewStats();
         } else if (choice.equals("q")) {
-            pickedQuit();
+            System.out.println("Thank you for using the chess opening analyzer!");
         } else {
             pickNotValid();
         }
@@ -178,11 +179,11 @@ public class OpeningsAnalyzer {
     }
 
     public void pickedViewStats() {
+        System.out.println("Your current overall winrate is " + gl.ovrlWinRate() + "%.");
+        System.out.println("If you would like to check your win rate with your specific opening, type 'a'.");
+        System.out.println("If you would like to check your win rate against a  specific opening, type 'b'.");
+        System.out.println("Type m to go back to menu.");
 
-    }
-
-    public void pickedQuit() {
-        System.out.println("Thank you for using the chess opening analyzer!");
     }
 
     public void pickNotValid() {

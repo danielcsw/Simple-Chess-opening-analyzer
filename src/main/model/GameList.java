@@ -63,7 +63,7 @@ public class GameList {
 
 
     //EFFECTS: returns the win rate of the games with given MyOpening.
-    public double openingWinRate(String myOpening) {
+    public double myOpeningWinRate(String myOpening) {
         LinkedList<Game> filteredList = new LinkedList<Game>();
         double wins = 0;
 
@@ -82,34 +82,33 @@ public class GameList {
         return Math.round(winrate * 100.0) / 100.0;
     }
 
+    //EFFECTS: returns the win rate of the games with given theirOpening.
+    public double theirOpeningWinRate(String theirOpening) {
+        LinkedList<Game> filteredList = new LinkedList<Game>();
+        double wins = 0;
+
+        for (Game g : list) {
+            if (g.getTheirOpening() == theirOpening) {
+                filteredList.add(g);
+            }
+        }
+
+        for (Game f : filteredList) {
+            if (f.getResult() == "won") {
+                wins = wins + 1;
+            }
+        }
+        double winrate = (double) 100 * (wins / filteredList.size());
+        return Math.round(winrate * 100.0) / 100.0;
+    }
+
+
+
     //EFFECTS: returns a list of game, so that openingsAnalyzer can handle it in loops
     public LinkedList<Game> getList() {
         return list;
     }
 
-    //EFFECTS: gets the most frequently used opening.
-    public String frequentOpening() {
-        return "";
-    }
 
-    //EFFECTS: gets the opening that has the best win rate
-    public String bestOpening() {
-        return "";
-    }
-
-    //EFFECTS: gets the opening with the worst win rate
-    public String worstOpening() {
-        return "";
-    }
-
-    //EFFECTS: gets the opening that is the most played against
-    public String mostVersedOpening() {
-        return "";
-    }
-
-    //EFFECTS: gets the opening that opponent played that you have the worst win rate against
-    public String worstVersedOpening() {
-        return "";
-    }
 
 }

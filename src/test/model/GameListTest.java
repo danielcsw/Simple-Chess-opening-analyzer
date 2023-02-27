@@ -134,7 +134,7 @@ public class GameListTest {
     }
 
     @Test
-    void testOpeningWinRate() {
+    void testMyOpeningWinRate() {
         g1.addGame(a);
         g1.addGame(b);
         g1.addGame(c);
@@ -143,58 +143,37 @@ public class GameListTest {
         g1.addGame(f);
         g1.addGame(g);
         g1.addGame(h);
-        assertEquals(100, g1.openingWinRate("queen's gambit"));
-        assertEquals(50, g1.openingWinRate("sicilian defense"));
+        assertEquals(100, g1.myOpeningWinRate("queen's gambit"));
+        assertEquals(50, g1.myOpeningWinRate("sicilian defense"));
 
         g1.addGame(g);
         g1.addGame(g);
         g1.addGame(g);
         g1.addGame(g);
         g1.addGame(g);
-        assertEquals(14.29, g1.openingWinRate("sicilian defense"));
-
-    }
-
-
-    @Test
-    void testFrequentOpening() {
-
+        assertEquals(14.29, g1.myOpeningWinRate("sicilian defense"));
     }
 
     @Test
-    void testBestOpening() {
+    void testTheirOpeningWinRate() {
+        g1.addGame(a);
+        g1.addGame(b);
+        g1.addGame(c);
+        g1.addGame(d);
+        g1.addGame(e);
+        g1.addGame(f);
+        g1.addGame(g);
+        g1.addGame(h);
+        assertEquals(100, g1.theirOpeningWinRate("queen's gambit declined"));
+        assertEquals(25, g1.theirOpeningWinRate("king's pawn opening"));
 
+        g1.addGame(h);
+        g1.addGame(h);
+        g1.addGame(h);
+        g1.addGame(h);
+        g1.addGame(h);
+        assertEquals(66.67, g1.theirOpeningWinRate("king's pawn opening"));
     }
-
-    @Test
-    void testWorstOpening() {
-
-    }
-
-    @Test
-    void testMostVersedOpening() {
-
-    }
-
-    @Test
-    void testWorstVersedOpening() {
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
