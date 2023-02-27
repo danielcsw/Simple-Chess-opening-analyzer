@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class OpeningsAnalyzer {
 
     Scanner input = new Scanner(System.in);
+    Scanner input2 = new Scanner(System.in);    //made 2 scanners because there was a bug in some methods when using 1
     private GameList gl;
     private Game game;
     private String color;
@@ -46,7 +47,7 @@ public class OpeningsAnalyzer {
 
     }
 
-    //EFFECTS: shows user how many games were played, and also takes user input
+    //EFFECTS: shows user how many games were played, and also takes user input for what they wanna do
     public void menu() {
         System.out.println("");
         System.out.println("Currently, you have played " + gl.length() + " games.");
@@ -67,9 +68,9 @@ public class OpeningsAnalyzer {
         } else {
             pickNotValid();
         }
-
     }
 
+    //EFFECTS: takes the user input for game.
     public void pickedAddGame() {
         System.out.println("What color did you play as?");
         System.out.println("Choices are 'white' or 'black'.");
@@ -92,6 +93,7 @@ public class OpeningsAnalyzer {
 
     }
 
+    //EFFECTS: gets the result of the game.
     public void getTheResult() {
         System.out.println("Did you win, lose, or draw?");
         System.out.println("Choices are 'won', 'lost', or 'drew'");
@@ -106,6 +108,7 @@ public class OpeningsAnalyzer {
 
     }
 
+    //EFFECTS: makes a new game based on the user input and adds it to the GameList.
     public void nowAddGame() {
         game = new Game(color, myOpening, theirOpening, result);
         gl.addGame(game);
@@ -115,6 +118,7 @@ public class OpeningsAnalyzer {
 
     }
 
+    //EFFECTS: asks user if they wanna keep adding or go back to menu
     public void whatNext() {
         String choice = input.nextLine();;
 
@@ -130,9 +134,9 @@ public class OpeningsAnalyzer {
     }
 
 
-
+    //EFFECTS: shows the user all the games that are in the GameList so far
     public void viewGames() {
-        System.out.println("----------------------------------------------y------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------");
         int count = 0;
         LinkedList<Game> list = gl.getList();
 
@@ -141,14 +145,16 @@ public class OpeningsAnalyzer {
             System.out.println("Game" + count + ": played as " + g.getColor() + ", played " + g.getMyOpening()
                     + " against " + g.getTheirOpening() + ". " + g.getResult());
         }
-        System.out.println("--------------------------------------------u--------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------");
         removeOrGoBack();
     }
 
+    //EFFECTS: asks user if they want to remove a game or go back
     public void removeOrGoBack() {
         System.out.println("Type 'm' to go back to menu. ");
         System.out.println("If you would like to remove a game, type r.");
-        String choice = input.nextLine();
+        String choice = input.next();
+
         if (choice.equals("m")) {
             menu();
         } else if (choice.equals("r")) {
@@ -160,10 +166,11 @@ public class OpeningsAnalyzer {
         }
     }
 
+    //EFFECTS: asks user on what game they want to remove, or if they wanna cancel
     public void remove() {
         System.out.println("Type the game number of the game you would like to remove.");
         System.out.println("If you would like to cancel, type 0.");
-        int n = input.nextInt();
+        int n = input2.nextInt();
 
         if (n == 0) {
             System.out.println("Cancelled removing game.");
@@ -176,9 +183,9 @@ public class OpeningsAnalyzer {
             System.out.println("You have removed game" + n + ".");
             viewGames();
         }
-
     }
 
+    //EFFECTS: shows the user the overall winrate, and asks if they want to go back to menu or see specific win rates
     public void pickedViewStats() {
         System.out.println("Your current overall winrate is " + gl.ovrlWinRate() + "%.");
         System.out.println("If you would like to check your win rate with your specific opening, type 'a'.");
@@ -196,9 +203,9 @@ public class OpeningsAnalyzer {
             System.out.println("That's not a valid input.");
             pickedViewStats();
         }
-
     }
 
+    //EFFECTS: shows the user the win rate for the opening given.
     public void myOpeningWR() {
         System.out.println("Type the opening that you played you want to see the win rate of.");
         String n = input.nextLine();
@@ -206,6 +213,7 @@ public class OpeningsAnalyzer {
         afterMWR();
     }
 
+    //EFFECTS: asks user if they want to check win rates for other openings or go back
     public void afterMWR() {
         System.out.println("If you would like to check win rates with other openings, type 'a'.");
         System.out.println("If you would like to go back to statistics menu, type 's'.");
@@ -221,6 +229,7 @@ public class OpeningsAnalyzer {
         }
     }
 
+    //EFFECTS: shows the user the win rate against the opening given.
     public void theirOpeningWR() {
         System.out.println("Type the opening that you played against which you want to see the win rate of.");
         String n = input.nextLine();
@@ -228,6 +237,7 @@ public class OpeningsAnalyzer {
         afterTWR();
     }
 
+    //EFFECTS: asks user if they want to check win rates against other openings or go back
     public void afterTWR() {
         System.out.println("If you would like to check win rates against other openings, type 'a'.");
         System.out.println("If you would like to go back to statistics menu, type 's'.");
@@ -243,11 +253,10 @@ public class OpeningsAnalyzer {
         }
     }
 
-
+    //Tells user that the input was not valid
     public void pickNotValid() {
         System.out.println("That input is not valid.");
         menu();
+
     }
-
-
 }
