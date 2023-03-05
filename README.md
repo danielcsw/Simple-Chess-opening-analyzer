@@ -24,3 +24,7 @@ only me but also other chess players especially beginners to really understand t
 - *As a user, I want to be able to view my overall win rate.*
 - *As a user, I want to see my win rate with a specific opening.*
 
+- As a user, I want to be able to save my Game list to the file, if I wanted to.*
+- As a user, I want to be able to load my Game list from the file if I wanted to.*
+
+
