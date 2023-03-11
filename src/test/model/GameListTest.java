@@ -25,8 +25,8 @@ public class GameListTest {
     @BeforeEach
     void setUp() {
 
-        g1 = new GameList();
-        g2 = new GameList();
+        g1 = new GameList("g1 games");
+        g2 = new GameList("g2 games");
 
         a = new Game("white", "queen's gambit", "queen's gambit declined", "won");
         b = new Game("white", "queen's gambit", "queen's gambit accepted", "won");

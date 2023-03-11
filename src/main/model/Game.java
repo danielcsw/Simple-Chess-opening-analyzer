@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
     // Represents single chess game, that has the color I played as, opening that I played, opponent played, and result.
-public class Game {
+public class Game implements Writable {
 
     private String color;                      // color that I played
     private String myOpening;                  // opening that I played
@@ -39,6 +42,13 @@ public class Game {
         return result;
     }
 
-
-
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("color", color);
+        json.put("my opening", myOpening);
+        json.put("opponents opening", theirOpening);
+        json.put("result", result);
+        return json;
+    }
 }

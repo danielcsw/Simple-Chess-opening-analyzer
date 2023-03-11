@@ -2,7 +2,11 @@ package ui;
 
 import model.Game;
 import model.GameList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -17,25 +21,48 @@ public class OpeningsAnalyzer {
     private String theirOpening;
     private String result;
 
+    private static final String JSON_STORE = "./data/myFile.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
 
     // EFFECTS: runs the OpeningAnalyzer
     public OpeningsAnalyzer() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
 
-        gl = new GameList();
+        gl = new GameList("Users' Games");
         runOpeningsAnalyzer();
     }
 
     // EFFECTS: initializes gameList, and introduces the user to the application
     public void runOpeningsAnalyzer() {
-        gl = new GameList();
         System.out.println("_________________________________________________________________________________________");
         System.out.println("_________________________________________________________________________________________");
         System.out.println("Hello! Welcome to the chess opening analyzer. With this application, you can manually add");
         System.out.println("chess games that you have played, and see various statistics on your openings.");
         System.out.println("_________________________________________________________________________________________");
         System.out.println("_________________________________________________________________________________________");
-        menu();
+        startUp();
     }
+
+    private void startUp() {
+        System.out.println("Would you like to load up your previous data?");
+        System.out.println("enter 'y' if you would like to, 'n' if not.");
+        String choice = input.nextLine();
+
+        if (choice.equals("y")) {
+            loadWorkRoom();
+            menu();
+        } else if (choice.equals("n")) {
+            menu();
+        } else {
+            System.out.println("That's not a valid input.");
+            startUp();
+        }
+    }
+
+
 
     //EFFECTS: shows the user the option menu
     public void options() {
@@ -64,7 +91,8 @@ public class OpeningsAnalyzer {
             System.out.println("You are now viewing your statistics.");
             pickedViewStats();
         } else if (choice.equals("q")) {
-            System.out.println("Thank you for using the chess opening analyzer!");
+            System.out.println("You are now quitting.");
+            quit();
         } else {
             pickNotValid();
         }
@@ -84,7 +112,7 @@ public class OpeningsAnalyzer {
         System.out.println("What opening did you use?");
         myOpening = input.nextLine();
 
-        System.out.println("What opening did you opponent play?");
+        System.out.println("What opening did your opponent play?");
         theirOpening = input.nextLine();
 
         getTheResult();
@@ -257,6 +285,51 @@ public class OpeningsAnalyzer {
     public void pickNotValid() {
         System.out.println("That input is not valid.");
         menu();
-
     }
+
+    //EFFECTS: prompts user if they want to save the GameList to the file
+    public void quit() {
+        System.out.println("Would you like to save your added Games to file?");
+        System.out.println("enter 'y' if you would like to, 'n' if not.");
+        String choice = input.next();
+
+        if (choice.equals("y")) {
+            saveGameList();
+            System.out.println("Thank you for using the chess opening analyzer!");
+        } else if (choice.equals("n")) {
+            System.out.println("Thank you for using the chess opening analyzer!");
+        } else {
+            System.out.println("That's not a valid input.");
+            quit();
+        }
+    }
+
+
+
+    // MODIFIES: this
+    // EFFECTS: loads GameList from file
+    private void loadWorkRoom() {
+        try {
+            gl = jsonReader.read();
+            System.out.println("Successfully Loaded " + gl.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: saves the GameList to file
+    private void saveGameList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(gl);
+            jsonWriter.close();
+            System.out.println("Successfully Saved " + gl.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+
+
+
 }

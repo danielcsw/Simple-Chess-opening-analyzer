@@ -24,7 +24,7 @@ only me but also other chess players especially beginners to really understand t
 - *As a user, I want to be able to view my overall win rate.*
 - *As a user, I want to see my win rate with a specific opening.*
 
-- As a user, I want to be able to save my Game list to the file, if I wanted to.*
-- As a user, I want to be able to load my Game list from the file if I wanted to.*
+- *As a user, when I select the quit option from the application menu, I want to be reminded to save my Game list to file and have the option to do so or not.*
+- *As a user, when I start the application, I want to be given the option to load my Game list from file*
 
 

@@ -1,15 +1,21 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.LinkedList;
 
 //Represents a list of games to be handled by the OpeningsAnalyzer.
 //No maximum size.
-public class GameList {
+public class GameList implements Writable {
 
+    private String name;
     private LinkedList<Game> list;
 
-    //EFFECTS: constructs GameList with no arguments.
-    public GameList() {
+    //EFFECTS: constructs GameList that has a name as an arguement.
+    public GameList(String name) {
+        this.name = name;
         list = new LinkedList<Game>();
     }
 
@@ -105,6 +111,30 @@ public class GameList {
     //EFFECTS: returns a list of game, so that openingsAnalyzer can handle it in loops
     public LinkedList<Game> getList() {
         return list;
+    }
+
+    //EFFECTS: returns the name of the GameList
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("Games", gamesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray gamesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Game g : list) {
+            jsonArray.put(g.toJson());
+        }
+
+        return jsonArray;
     }
 
 
