@@ -190,4 +190,9 @@ public class GameListTest {
     }
 
 
+    void testGetName() {
+        assertEquals(g1.getName(), "g1 games");
+    }
+
+
 }
