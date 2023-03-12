@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class OpeningsAnalyzer {
 
-    Scanner input = new Scanner(System.in);
-    Scanner input2 = new Scanner(System.in);    //made 2 scanners because there was a bug in some methods when using 1
+    Scanner input;
+    Scanner input2;
     private GameList gl;
     private Game game;
     private String color;
@@ -28,6 +28,10 @@ public class OpeningsAnalyzer {
 
     // EFFECTS: runs the OpeningAnalyzer
     public OpeningsAnalyzer() {
+
+        input = new Scanner(System.in);
+        input2 = new Scanner(System.in);    //made 2 scanners because there was a bug in some methods when using 1
+
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 

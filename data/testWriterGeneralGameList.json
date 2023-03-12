@@ -1,0 +1,17 @@
+{
+    "Games": [
+        {
+            "result": "won",
+            "color": "white",
+            "opponents opening": "sicilian defense",
+            "my opening": "queens gambit"
+        },
+        {
+            "result": "lost",
+            "color": "black",
+            "opponents opening": "kings pawn",
+            "my opening": "caro kann"
+        }
+    ],
+    "name": "My game list"
+}

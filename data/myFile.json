@@ -1,0 +1,9 @@
+{
+    "Games": [{
+        "result": "won",
+        "color": "white",
+        "opponents opening": "hi",
+        "my opening": "hello"
+    }],
+    "name": "Users' Games"
+}
