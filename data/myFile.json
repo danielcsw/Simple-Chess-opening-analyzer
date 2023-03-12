@@ -1,9 +1,17 @@
 {
-    "Games": [{
-        "result": "won",
-        "color": "white",
-        "opponents opening": "hi",
-        "my opening": "hello"
-    }],
+    "Games": [
+        {
+            "result": "lost",
+            "color": "white",
+            "opponents opening": "weerhwh",
+            "my opening": "wegeg"
+        },
+        {
+            "result": "won",
+            "color": "black",
+            "opponents opening": "fax",
+            "my opening": "if you are seeing this its working "
+        }
+    ],
     "name": "Users' Games"
 }

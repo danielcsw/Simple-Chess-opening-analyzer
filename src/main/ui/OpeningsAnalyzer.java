@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class OpeningsAnalyzer {
 
     Scanner input;
-    Scanner input2;
+    Scanner input2;  //made 2 scanners because there was a bug in some methods when using 1
     private GameList gl;
     private Game game;
     private String color;
@@ -30,7 +30,7 @@ public class OpeningsAnalyzer {
     public OpeningsAnalyzer() {
 
         input = new Scanner(System.in);
-        input2 = new Scanner(System.in);    //made 2 scanners because there was a bug in some methods when using 1
+        input2 = new Scanner(System.in);
 
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -53,16 +53,18 @@ public class OpeningsAnalyzer {
     private void startUp() {
         System.out.println("Would you like to load up your previous data?");
         System.out.println("enter 'y' if you would like to, 'n' if not.");
-        String choice = input.nextLine();
+        String choice1 = input.nextLine();
 
-        if (choice.equals("y")) {
+        while (!((choice1.equals("y")) || (choice1.equals("n")))) {
+            System.out.println("That's not a valid input, please try again.");
+            choice1 = input.nextLine();
+        }
+
+        if (choice1.equals("y")) {
             loadWorkRoom();
             menu();
-        } else if (choice.equals("n")) {
-            menu();
         } else {
-            System.out.println("That's not a valid input.");
-            startUp();
+            menu();
         }
     }
 
@@ -75,7 +77,6 @@ public class OpeningsAnalyzer {
         System.out.println("Type 'b' to view all games,");
         System.out.println("Type 'c' to view your statistics,");
         System.out.println("Type 'q' to quit or start over.");
-
     }
 
     //EFFECTS: shows user how many games were played, and also takes user input for what they wanna do
@@ -83,22 +84,25 @@ public class OpeningsAnalyzer {
         System.out.println("");
         System.out.println("Currently, you have played " + gl.length() + " games.");
         options();
-        String choice = input.nextLine();
+        String choice2 = input.nextLine();
 
-        if (choice.equals("a")) {
+        while (!((choice2.equals("a")) || (choice2.equals("b")) || (choice2.equals("c")) || (choice2.equals("q")))) {
+            System.out.println("That's not a valid input, please try again.");
+            choice2 = input.nextLine();
+        }
+
+        if (choice2.equals("a")) {
             System.out.println("You're now adding a game to the system.");
             pickedAddGame();
-        } else if (choice.equals("b")) {
+        } else if (choice2.equals("b")) {
             System.out.println("You are now viewing all your games.");
             viewGames();
-        } else if (choice.equals("c")) {
+        } else if (choice2.equals("c")) {
             System.out.println("You are now viewing your statistics.");
             pickedViewStats();
-        } else if (choice.equals("q")) {
+        } else {
             System.out.println("You are now quitting.");
             quit();
-        } else {
-            pickNotValid();
         }
     }
 
@@ -108,9 +112,9 @@ public class OpeningsAnalyzer {
         System.out.println("Choices are 'white' or 'black'.");
         color = input.nextLine();
 
-        if (!(color.equals("white") || color.equals("black"))) {
-            System.out.println("Sorry, that's not a valid input.");
-            pickedAddGame();
+        while (!(color.equals("white") || color.equals("black"))) {
+            System.out.println("That's not a valid color, please try again.");
+            color = input.nextLine();
         }
 
         System.out.println("What opening did you use?");
@@ -119,26 +123,21 @@ public class OpeningsAnalyzer {
         System.out.println("What opening did your opponent play?");
         theirOpening = input.nextLine();
 
-        getTheResult();
+        System.out.println("Did you win, lose, or draw?");
+        System.out.println("Choices are 'won', 'lost', or 'drew'");
+        result = input.nextLine();
+
+        while (!(result.equals("won") || result.equals("lost") || result.equals("drew"))) {
+            System.out.println("That's not a valid result, please try again.");
+            result = input.nextLine();
+        }
+        System.out.println("");
+        System.out.println("You've now successfully added your game.");
 
         nowAddGame();
 
     }
 
-    //EFFECTS: gets the result of the game.
-    public void getTheResult() {
-        System.out.println("Did you win, lose, or draw?");
-        System.out.println("Choices are 'won', 'lost', or 'drew'");
-        result = input.nextLine();
-
-        if (!(result.equals("won") || result.equals("lost") || result.equals("drew"))) {
-            System.out.println("Sorry, that's not a valid input.");
-            getTheResult();
-        }
-        System.out.println("");
-        System.out.println("You've now successfully added your game.");
-
-    }
 
     //EFFECTS: makes a new game based on the user input and adds it to the GameList.
     public void nowAddGame() {
@@ -152,16 +151,18 @@ public class OpeningsAnalyzer {
 
     //EFFECTS: asks user if they wanna keep adding or go back to menu
     public void whatNext() {
-        String choice = input.nextLine();;
+        String choice3 = input.nextLine();;
 
-        if (choice.equals("a")) {
+        while (!(choice3.equals("a") || choice3.equals("m"))) {
+            System.out.println("That's not a valid input, please try again.");
+            choice3 = input.nextLine();
+        }
+
+        if (choice3.equals("a")) {
             pickedAddGame();
-        } else if (choice.equals("m")) {
+        } else {
             System.out.println("");
             menu();
-        } else {
-            System.out.println("Sorry, that's not a valid input.");
-            whatNext();
         }
     }
 
@@ -169,6 +170,8 @@ public class OpeningsAnalyzer {
     //EFFECTS: shows the user all the games that are in the GameList so far
     public void viewGames() {
         System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("Your games:");
+        System.out.println("");
         int count = 0;
         LinkedList<Game> list = gl.getList();
 
@@ -185,31 +188,39 @@ public class OpeningsAnalyzer {
     public void removeOrGoBack() {
         System.out.println("Type 'm' to go back to menu. ");
         System.out.println("If you would like to remove a game, type r.");
-        String choice = input.next();
+        String choice4 = input.nextLine();
 
-        if (choice.equals("m")) {
+        while (!(choice4.equals("m") || choice4.equals("r"))) {
+            System.out.println("That's not a valid input, please try again.");
+            choice4 = input.nextLine();
+        }
+
+        if (choice4.equals("m")) {
             menu();
-        } else if (choice.equals("r")) {
+        } else {
             System.out.println("You are now removing a game from the list.");
             remove();
-        } else {
-            System.out.println("That's not a valid input.");
-            removeOrGoBack();
         }
     }
 
     //EFFECTS: asks user on what game they want to remove, or if they wanna cancel
     public void remove() {
-        System.out.println("Type the game number of the game you would like to remove.");
-        System.out.println("If you would like to cancel, type 0.");
-        int n = input2.nextInt();
+        int n;
+
+        do {
+            System.out.println("Type the game number of the game you would like to remove.");
+            System.out.println("If you would like to cancel, type 0.");
+            n = input2.nextInt();
+
+            if (!(gl.checkIndex(n))) {
+                System.out.println("That game does not exist.");
+            }
+        } while (!(gl.checkIndex(n)));
+
 
         if (n == 0) {
             System.out.println("Cancelled removing game.");
             viewGames();
-        } else if (!(gl.checkIndex(n))) {
-            System.out.println("That game does not exist.");
-            remove();
         } else {
             gl.removeGame(n);
             System.out.println("You have removed game" + n + ".");
@@ -223,17 +234,19 @@ public class OpeningsAnalyzer {
         System.out.println("If you would like to check your win rate with your specific opening, type 'a'.");
         System.out.println("If you would like to check your win rate against a  specific opening, type 'b'.");
         System.out.println("Type m to go back to menu.");
-        String choice = input.nextLine();
+        String choice5 = input.nextLine();
 
-        if (choice.equals("a")) {
+        while (!(choice5.equals("a") || choice5.equals("b") || choice5.equals("m"))) {
+            System.out.println("That's not a valid input, please try again.");
+            choice5 = input.nextLine();
+        }
+
+        if (choice5.equals("a")) {
             myOpeningWR();
-        } else if (choice.equals("b")) {
+        } else if (choice5.equals("b")) {
             theirOpeningWR();
-        } else if (choice.equals("m")) {
-            menu();
         } else {
-            System.out.println("That's not a valid input.");
-            pickedViewStats();
+            menu();
         }
     }
 
@@ -249,15 +262,17 @@ public class OpeningsAnalyzer {
     public void afterMWR() {
         System.out.println("If you would like to check win rates with other openings, type 'a'.");
         System.out.println("If you would like to go back to statistics menu, type 's'.");
-        String x = input.nextLine();
+        String choice6 = input.nextLine();
 
-        if (x.equals("a")) {
+        while (!(choice6.equals("a") || choice6.equals("s"))) {
+            System.out.println("That's not a valid input, please try again.");
+            choice6 = input.nextLine();
+        }
+
+        if (choice6.equals("a")) {
             myOpeningWR();
-        } else if (x.equals("s")) {
-            pickedViewStats();
         } else {
-            System.out.println("That's not a valid input.");
-            afterMWR();
+            pickedViewStats();
         }
     }
 
@@ -273,15 +288,17 @@ public class OpeningsAnalyzer {
     public void afterTWR() {
         System.out.println("If you would like to check win rates against other openings, type 'a'.");
         System.out.println("If you would like to go back to statistics menu, type 's'.");
-        String x = input.nextLine();
+        String choice7 = input.nextLine();
 
-        if (x.equals("a")) {
+        while (!(choice7.equals("a") || choice7.equals("s"))) {
+            System.out.println("That's not a valid input, please try again.");
+            choice7 = input.nextLine();
+        }
+
+        if (choice7.equals("a")) {
             theirOpeningWR();
-        } else if (x.equals("s")) {
-            pickedViewStats();
         } else {
-            System.out.println("That's not a valid input.");
-            afterTWR();
+            pickedViewStats();
         }
     }
 
@@ -295,16 +312,18 @@ public class OpeningsAnalyzer {
     public void quit() {
         System.out.println("Would you like to save your added Games to file?");
         System.out.println("enter 'y' if you would like to, 'n' if not.");
-        String choice = input.next();
+        String choice8 = input.nextLine();
 
-        if (choice.equals("y")) {
+        while (!(choice8.equals("y") || choice8.equals("n"))) {
+            System.out.println("That's not a valid input, please try again.");
+            choice8 = input.nextLine();
+        }
+
+        if (choice8.equals("y")) {
             saveGameList();
             System.out.println("Thank you for using the chess opening analyzer!");
-        } else if (choice.equals("n")) {
-            System.out.println("Thank you for using the chess opening analyzer!");
         } else {
-            System.out.println("That's not a valid input.");
-            quit();
+            System.out.println("Thank you for using the chess opening analyzer!");
         }
     }
 
