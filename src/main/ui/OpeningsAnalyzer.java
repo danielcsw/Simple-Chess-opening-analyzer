@@ -51,7 +51,7 @@ public class OpeningsAnalyzer {
     }
 
     private void startUp() {
-        System.out.println("Would you like to load up your previous data?");
+        System.out.println("Would you like to load up your previous games?");
         System.out.println("enter 'y' if you would like to, 'n' if not.");
         String choice1 = input.nextLine();
 
@@ -310,7 +310,7 @@ public class OpeningsAnalyzer {
 
     //EFFECTS: prompts user if they want to save the GameList to the file
     public void quit() {
-        System.out.println("Would you like to save your added Games to file?");
+        System.out.println("Would you like to save your changes to file?");
         System.out.println("enter 'y' if you would like to, 'n' if not.");
         String choice8 = input.nextLine();
 
