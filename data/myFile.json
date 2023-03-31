@@ -1,17 +1,9 @@
 {
-    "Games": [
-        {
-            "result": "lost",
-            "color": "white",
-            "opponents opening": "weerhwh",
-            "my opening": "wegeg"
-        },
-        {
-            "result": "won",
-            "color": "black",
-            "opponents opening": "fax",
-            "my opening": "if you are seeing this its working "
-        }
-    ],
+    "Games": [{
+        "result": "won",
+        "color": "white",
+        "opponents opening": "wefwe",
+        "my opening": "sdfsf"
+    }],
     "name": "Users' Games"
 }

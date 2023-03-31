@@ -13,7 +13,7 @@ public class GameList implements Writable {
     private String name;
     private LinkedList<Game> list;
 
-    //EFFECTS: constructs GameList that has a name as an arguement.
+    //EFFECTS: constructs GameList that has a name as an argument.
     public GameList(String name) {
         this.name = name;
         list = new LinkedList<Game>();
@@ -118,6 +118,7 @@ public class GameList implements Writable {
         return name;
     }
 
+    // writes new json object so that the games can be saved as json.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -126,7 +127,7 @@ public class GameList implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns games in this gamelist as a JSON array
     private JSONArray gamesToJson() {
         JSONArray jsonArray = new JSONArray();
 

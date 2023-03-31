@@ -42,6 +42,7 @@ public class Game implements Writable {
         return result;
     }
 
+    // EFFECTS: writes a new Json object so that GameList can be saved as Json.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

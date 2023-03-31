@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+//runs the UI of the project. Implements user input and interface for user.
 public class OpeningsAnalyzer {
 
     Scanner input;
