@@ -34,8 +34,8 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
 
     JFrame frame = new JFrame("Opening Analyzer");
     JPanel panel = new JPanel();
-    JLabel colorlabel = new JLabel("which color did you play as?");
-    JLabel currentcolor = new JLabel("none");
+    JLabel colorLabel = new JLabel("which color did you play as?");
+    JLabel currentColor = new JLabel("none");
     JLabel currentResult = new JLabel("none");
     JLabel myOpeningLabel = new JLabel("what opening did you play?");
     JLabel theirOpeningLabel = new JLabel("what opening did your opponent play?");
@@ -53,14 +53,14 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             color = "white";
-            currentcolor.setText(color);
+            currentColor.setText(color);
         }
     });
     JButton blackbutton = new JButton(new AbstractAction("Black") {
         @Override
         public void actionPerformed(ActionEvent e) {
             color = "black";
-            currentcolor.setText(color);
+            currentColor.setText(color);
         }
     });
 
@@ -131,9 +131,7 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
                 }
             }
         });
-
         rungui();
-
     }
 
     // EFFECTS: Runs the important methods that all implement the gui.
@@ -167,17 +165,17 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
 
     //EFFECTS: implements button guis for adding color.
     public void colorStuff() {
-        currentcolor.setBounds(350, 10, 50, 20);
-        colorlabel.setBounds(2, 10, 200, 20);
+        currentColor.setBounds(350, 10, 50, 20);
+        colorLabel.setBounds(2, 10, 200, 20);
         whitebutton.setBounds(180, 10, 70, 20);
         whitebutton.addActionListener(this);
         blackbutton.setBounds(260, 10, 70,20);
         blackbutton.addActionListener(this);
 
-        panel.add(colorlabel);
+        panel.add(colorLabel);
         panel.add(whitebutton);
         panel.add(blackbutton);
-        panel.add(currentcolor);
+        panel.add(currentColor);
     }
 
     //EFFECTS: implements button guis for adding openings.
@@ -223,7 +221,6 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
         panel.add(removeText);
         panel.add(removebutton);
         panel.add(message2);
-
     }
 
     //  //EFFECTS: implements guis for main panel. Runs the method for viewing games.
@@ -283,13 +280,13 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
         myOpening = inputMyOpening.getText();
         theirOpening = inputTheirOpening.getText();
 
-        if (currentcolor.getText() == "none" || inputMyOpening.getText().isEmpty()
+        if (currentColor.getText() == "none" || inputMyOpening.getText().isEmpty()
                 || inputTheirOpening.getText().isEmpty() || currentResult.getText() == "none") {
             message.setText("Please input all values");
         } else {
             addToSystem();
             message.setText("");
-            currentcolor.setText("none");
+            currentColor.setText("none");
             currentResult.setText("none");
         }
     }
