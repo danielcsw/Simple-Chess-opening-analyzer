@@ -28,3 +28,15 @@ only me but also other chess players especially beginners to really understand t
 - *As a user, when I start the application, I want to be given the option to load my Game list from file*
 
 
+# Instructions for Grader
+
+- You can generate the first required action related to adding Xs to a Y by... 1) clicking on one of the two color 
+buttons, 2) writing both opening that user played and played against, 3) clicking on one of three result buttons, 4) 
+click confirm button
+- You can generate the second required action related to adding Xs to a Y by entering the number of the game you want 
+to remove, then click remove game button.
+- You can locate my visual component by starting the application, or by successfully adding game to the list.
+- You can save the state of my application by clicking on exit button of window. (x)
+- You can reload the state of my application by starting the application then clicking yes on the pop-up window.
+
+
