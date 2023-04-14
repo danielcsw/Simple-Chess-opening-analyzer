@@ -48,3 +48,12 @@ Added Game 1: played as white, played Queens Gambit against Gambit Declined. won
 
 Thu Apr 13 18:40:43 PDT 2023
 Removed Game 1: played as white, played Queens Gambit against Gambit Declined. won
+
+# Phase 4: Task 3
+
+-If I had more time to work on the project, I might refactor my project such that instead of having GameList object 
+store all the Game objects, I would simply just create a linkedlist in the GUI (or console ui) that will store the game
+objects. The reason for this is that it would make the program simpler to analyze, and the important functions like 
+adding games, removing games, and calculating winrates and just be done within the GUI, instead of calling another
+class like GameList. The downside for this is that it would make the GUI class even longer than it already is, so it 
+could make it harder to understand for certain coders. 
