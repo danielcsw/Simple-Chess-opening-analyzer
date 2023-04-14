@@ -23,6 +23,9 @@ public class GameList implements Writable {
     //EFFECTS: adds game to the list
     public void addGame(Game game) {
         list.add(game);
+        EventLog.getInstance().logEvent(new Event("Added Game " + length() + ": played as "
+                + game.getColor() + ", played " + game.getMyOpening() + " against " + game.getTheirOpening()
+                + ". " + game.getResult()));
     }
 
 
@@ -39,13 +42,16 @@ public class GameList implements Writable {
     //MODIFIES: this
     //EFFECTS: returns the game with the given index
     public Game getGame(int index) {
-        return list.get(index);
+        return list.get(index - 1);
     }
 
     //REQUIRES: given index must exist in the list (positive integer, and is less than the size of the list).
     //MODIFIES: this
     //EFFECTS: removes the game with the given index
     public void removeGame(int index) {
+        EventLog.getInstance().logEvent(new Event("Removed Game " + index + ": played as "
+                + getGame(index).getColor() + ", played " + getGame(index).getMyOpening()
+                + " against " + getGame(index).getTheirOpening() + ". " + getGame(index).getResult()));
         list.remove(index - 1);
     }
 
@@ -137,7 +143,6 @@ public class GameList implements Writable {
 
         return jsonArray;
     }
-
-
-
 }
+
+

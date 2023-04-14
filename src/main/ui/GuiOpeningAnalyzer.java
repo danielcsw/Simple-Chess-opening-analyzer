@@ -6,6 +6,8 @@ import model.Game;
 import model.GameList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import model.Event;
+import model.EventLog;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -126,8 +128,10 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
                 if (result == JOptionPane.YES_OPTION) {
                     saveGameList();
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    printLog(EventLog.getInstance());
                 } else if (result == JOptionPane.NO_OPTION) {
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    printLog(EventLog.getInstance());
                 }
             }
         });
@@ -318,8 +322,19 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
         gl.addGame(game);
         amountOfGames.setText("you've played " + gl.length() + " Games so far");
 
-        l1.addElement("Game" + gl.length() + ": played as " + color + ", played " + myOpening
-                + " against " + theirOpening + ". " + result);
+        //l1.addElement("Game" + gl.length() + ": played as " + color + ", played " + myOpening
+        //      + " against " + theirOpening + ". " + result);
+
+        l1.clear();
+        int count = 0;
+        LinkedList<Game> list = gl.getList();
+
+        for (Game g : list) {
+            count = count + 1;
+            l1.addElement("Game" + count + ": played as " + g.getColor() + ", played " + g.getMyOpening()
+                    + " against " + g.getTheirOpening() + ". " + g.getResult());
+        }
+
     }
 
 
@@ -327,7 +342,17 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
     public void removeFromSystem() {
         gl.removeGame(removingNumber);
         amountOfGames.setText("you've played " + gl.length() + " Games so far");
-        l1.removeElementAt(removingNumber - 1);
+        //l1.removeElementAt(removingNumber - 1);
+
+        l1.clear();
+        int count = 0;
+        LinkedList<Game> list = gl.getList();
+
+        for (Game g : list) {
+            count = count + 1;
+            l1.addElement("Game" + count + ": played as " + g.getColor() + ", played " + g.getMyOpening()
+                    + " against " + g.getTheirOpening() + ". " + g.getResult());
+        }
 
     }
 
@@ -355,6 +380,13 @@ public class GuiOpeningAnalyzer extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: prints the log to the console
+    private void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n\n");
+        }
+    }
 }
+
 
 

@@ -40,3 +40,11 @@ to remove, then click remove game button.
 - You can reload the state of my application by starting the application then clicking yes on the pop-up window.
 
 
+# Phase 4: Task 2
+
+Thu Apr 13 18:40:42 PDT 2023
+Added Game 1: played as white, played Queens Gambit against Gambit Declined. won
+
+
+Thu Apr 13 18:40:43 PDT 2023
+Removed Game 1: played as white, played Queens Gambit against Gambit Declined. won
